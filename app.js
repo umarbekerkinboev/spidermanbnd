@@ -110,7 +110,7 @@
   function setupNotify(whenText, note, kind = "custom") {
     lastPingMessage =
       kind === "aug14"
-        ? `Hey Umar! I’m in for Spider-Man BND at Corvin Mozi — Friday Aug 14 around 5 PM.`
+        ? `Aug 14, 5 PM is good.`
         : buildPingMessage(whenText, note);
 
     btnNotify.hidden = false;
@@ -243,8 +243,7 @@
       "Almost locked — one last tap so Umar gets the memo on Instagram.";
     rsvpWhen.textContent = whenText;
     setupNotify(whenText, "", "aug14");
-    lastPingMessage =
-      "Hey Umar! I’m in for Spider-Man BND at Corvin Mozi — Friday Aug 14 around 5 PM.";
+    lastPingMessage = "Aug 14, 5 PM is good.";
     copyPingMessage();
     window.open(NOTIFY.instagramUrl, "_blank", "noopener,noreferrer");
     notifyHint.textContent =
