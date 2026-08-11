@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#07090f" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="description" content="Kata’s classified Spider-Man briefing. Corvin Mozi. Brand New Day." />
+  <meta name="apple-mobile-web-app-title" content="Kata · BND" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2307090f'/%3E%3Cpath d='M32 8c2 10 10 16 10 24a10 10 0 01-20 0c0-8 8-14 10-24z' fill='%23e11d2e'/%3E%3Cpath d='M22 28c-8 2-14 8-14 14m34-14c8 2 14 8 14 14M18 48c6-4 10-4 14-4s8 0 14 4' stroke='%233d7cff' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <title>Hey Kata — BND Mission</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="poster-wall" aria-hidden="true">
+    <div class="poster-wall__track">
+      <img src="assets/poster-official.jpg" alt="" decoding="async" width="400" height="600" />
+      <img src="assets/poster-hulk.jpg" alt="" decoding="async" width="400" height="600" />
+      <img src="assets/poster-alt.jpg" alt="" decoding="async" width="400" height="600" />
+      <img src="assets/poster-corvin.webp" alt="" decoding="async" width="400" height="600" />
+      <img src="assets/poster-official.jpg" alt="" decoding="async" width="400" height="600" />
+      <img src="assets/poster-hulk.jpg" alt="" decoding="async" width="400" height="600" />
+      <img src="assets/poster-alt.jpg" alt="" decoding="async" width="400" height="600" />
+      <img src="assets/poster-corvin.webp" alt="" decoding="async" width="400" height="600" />
+    </div>
+    <div class="poster-wall__veil"></div>
+  </div>
+  <div class="noise" aria-hidden="true"></div>
+  <canvas id="web-canvas" aria-hidden="true"></canvas>
+
+  <div class="progress" aria-hidden="true">
+    <div class="progress__bar" id="progress-bar" style="width:10%"></div>
+  </div>
+
+  <!-- SCENE 0: BOOT -->
+  <section class="scene scene--active" id="scene-boot" data-scene="0">
+    <div class="boot">
+      <div class="boot__radar" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+      <p class="eyebrow">INCOMING · PRIORITY: KATA</p>
+      <h1 class="boot__title">
+        <span class="line">Hey,</span>
+        <span class="line accent">Kata.</span>
+      </h1>
+      <p class="boot__sub">
+        Full disclosure: I had some free time and absolutely no idea what to do with it…
+        so I built you a whole website about a movie invite. Totally normal btw.
+        <br /><em class="motto">Better late than never.</em>
+      </p>
+      <button class="btn btn--primary" type="button" data-next="briefing">
+        Fine, I’m curious
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- SCENE 1: BRIEFING -->
+  <section class="scene" id="scene-briefing" data-scene="1" hidden>
+    <div class="panel">
+      <p class="eyebrow">OPERATION: KATA + SPIDEY</p>
+      <h2 class="display">Spider-Man<br /><span class="red">Brand New Day</span></h2>
+      <p class="lede">
+        Pitch, Kata: we leave the office, enter Corvin Mozi (the one staring at Corvin Plaza),
+        and let Tom Holland do the heavy swinging. Fair trade. Boardroom approved. Probably.
+      </p>
+      <p class="thanks">And seriously — thank you for saving my ass at work all this time.</p>
+      <ul class="facts">
+        <li>
+          <span class="facts__label">Film</span>
+          <span class="facts__value">Spider-Man: Brand New Day</span>
+        </li>
+        <li>
+          <span class="facts__label">Where</span>
+          <span class="facts__value">Corvin Mozi · facing Corvin Plaza</span>
+        </li>
+        <li>
+          <span class="facts__label">Tickets</span>
+          <span class="facts__value">On me</span>
+        </li>
+        <li>
+          <span class="facts__label">Snacks</span>
+          <span class="facts__value">On you (choose wisely)</span>
+        </li>
+      </ul>
+      <button class="btn btn--primary" type="button" data-next="schedule">
+        Okay, check my calendar
+      </button>
+    </div>
+  </section>
+
+  <!-- SCENE 2: SCHEDULE -->
+  <section class="scene" id="scene-schedule" data-scene="2" hidden>
+    <div class="panel">
+      <p class="eyebrow" id="schedule-eyebrow">HIGHLY SCIENTIFIC AVAILABILITY TEST</p>
+      <h2 class="display" id="schedule-title">Pick a time.<br /><span class="soft" style="font-size:.55em;color:var(--muted)">Or watch them fail.</span></h2>
+      <p class="lede" id="schedule-lede">Two decoy slots first. The algorithm (me) already knows the plot twist.</p>
+
+      <div class="slots" id="slots" role="list">
+        <button class="slot" type="button" role="listitem" data-slot="aug12">
+          <span class="slot__day">Wed</span>
+          <span class="slot__date">Aug 12</span>
+          <span class="slot__time">~5:00 PM</span>
+          <span class="slot__status">Looks free?</span>
+        </button>
+        <button class="slot" type="button" role="listitem" data-slot="aug13">
+          <span class="slot__day">Thu</span>
+          <span class="slot__date">Aug 13</span>
+          <span class="slot__time">~6:00 PM</span>
+          <span class="slot__status">Looks free?</span>
+        </button>
+        <button class="slot slot--locked" type="button" role="listitem" data-slot="aug14" disabled>
+          <span class="slot__day">Fri</span>
+          <span class="slot__date">Aug 14</span>
+          <span class="slot__time">~5:00 PM</span>
+          <span class="slot__status">Classified</span>
+        </button>
+        <button class="slot slot--compliment" type="button" role="listitem" data-slot="compliment">
+          <span class="slot__day">★</span>
+          <span class="slot__date">Umar, you are amazing</span>
+          <span class="slot__time">Not a time slot. Just facts.</span>
+          <span class="slot__status">Tap me</span>
+        </button>
+      </div>
+
+      <div class="smile-pop" id="smile-pop" hidden role="status" aria-live="polite">
+        <span class="smile-pop__face" aria-hidden="true">☺️</span>
+        <p class="smile-pop__text">I knew you’d say that</p>
+      </div>
+
+      <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+    </div>
+  </section>
+
+  <!-- SCENE 3: REVEAL -->
+  <section class="scene" id="scene-reveal" data-scene="3" hidden>
+    <div class="reveal">
+      <div class="reveal__burst" aria-hidden="true"></div>
+      <p class="eyebrow">PLOT TWIST (PREDICTABLE)</p>
+      <h2 class="display reveal__title">
+        Friday<br /><span class="red">Aug 14</span><br /><span class="soft">~5:00 PM</span>
+      </h2>
+      <p class="lede reveal__copy">
+        Kata, your shifts vaporized the decoys. This is the golden hour —
+        Corvin Mozi, right in front of Corvin Plaza.
+      </p>
+      <div class="ticket">
+        <div class="ticket__shine" aria-hidden="true"></div>
+        <div class="ticket__top">
+          <span class="ticket__brand">CORVIN MOZI</span>
+          <span class="ticket__badge">ALMOST REAL</span>
+        </div>
+        <h3 class="ticket__film">Spider-Man<br />Brand New Day</h3>
+        <div class="ticket__meta">
+          <div>
+            <span>When</span>
+            <strong>Fri Aug 14 · ~5 PM</strong>
+          </div>
+          <div>
+            <span>Where</span>
+            <strong>Corvin köz 1</strong>
+          </div>
+          <div>
+            <span>Seats</span>
+            <strong>Two</strong>
+          </div>
+        </div>
+        <div class="ticket__stub">
+          <span>BETTER LATE THAN NEVER</span>
+          <span>ADMIT TWO</span>
+        </div>
+      </div>
+      <button class="btn btn--primary" type="button" id="btn-accept-14">
+        Aug 14 works — I’m in
+      </button>
+      <button class="btn btn--ghost" type="button" data-next="custom">
+        I’ll suggest a time myself
+      </button>
+    </div>
+  </section>
+
+  <!-- SCENE 3b: CUSTOM TIME -->
+  <section class="scene" id="scene-custom" data-scene="3b" hidden>
+    <div class="panel">
+      <p class="eyebrow">PLAN B · DIRECTOR’S CUT</p>
+      <h2 class="display">Your move,<br /><span class="red">Kata.</span></h2>
+      <p class="lede">
+        Aug 14 ~5 PM didn’t survive contact with reality? Cool.
+        Pick a better window below, then text me on Instagram —
+        <a class="ig-link" href="https://www.instagram.com/umarbekerkinboev/" target="_blank" rel="noopener">@umarbekerkinboev</a>.
+      </p>
+
+      <label class="field">
+        <span class="field__label">Day that actually works</span>
+        <input class="field__input" id="custom-day" type="date" min="2026-08-11" />
+      </label>
+      <label class="field">
+        <span class="field__label">Around what time?</span>
+        <input class="field__input" id="custom-time" type="time" value="17:00" />
+      </label>
+      <label class="field">
+        <span class="field__label">Optional note (chaos welcome)</span>
+        <textarea class="field__input field__input--area" id="custom-note" rows="3" maxlength="160" placeholder="e.g. after my shift, before I turn into a pumpkin…"></textarea>
+      </label>
+
+      <button class="btn btn--primary" type="button" id="btn-submit-custom">
+        Save &amp; open Instagram
+      </button>
+      <button class="btn btn--ghost" type="button" data-next="reveal">
+        Wait — Aug 14 might be fine
+      </button>
+    </div>
+  </section>
+
+  <!-- SCENE 4: RSVP -->
+  <section class="scene" id="scene-rsvp" data-scene="4" hidden>
+    <div class="panel panel--center">
+      <div class="success-mark" aria-hidden="true">
+        <svg viewBox="0 0 80 80" width="72" height="72">
+          <circle cx="40" cy="40" r="36" fill="none" stroke="currentColor" stroke-width="3" opacity=".25"/>
+          <path class="check" d="M22 41l12 12 24-26" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <p class="eyebrow" id="rsvp-eyebrow">MISSION ACCEPTED</p>
+      <h2 class="display" id="rsvp-title">See you at Corvin, Kata.</h2>
+      <p class="lede" id="rsvp-lede" style="margin-left:auto;margin-right:auto;">
+        Locked in. Together we grab a Brand New Day.
+      </p>
+      <div class="summary" id="rsvp-summary">
+        <p><strong>Spider-Man: Brand New Day</strong></p>
+        <p>Corvin Mozi · facing Corvin Plaza</p>
+        <p id="rsvp-when">Friday, August 14 · around 5:00 PM</p>
+      </div>
+      <a class="btn btn--primary" id="btn-notify" hidden href="#" target="_blank" rel="noopener">
+        Ping him with this time
+      </a>
+      <p class="notify-hint" id="notify-hint" hidden></p>
+      <button class="btn btn--ghost" type="button" id="btn-replay">
+        Replay this masterpiece
+      </button>
+    </div>
+  </section>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
