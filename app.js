@@ -107,19 +107,25 @@
       .catch(() => false);
   }
 
-  function setupNotify(whenText, note) {
-    lastPingMessage = buildPingMessage(whenText, note);
+  function setupNotify(whenText, note, kind = "custom") {
+    lastPingMessage =
+      kind === "aug14"
+        ? `Hey Umar! I’m in for Spider-Man BND at Corvin Mozi — Friday Aug 14 around 5 PM.`
+        : buildPingMessage(whenText, note);
 
     btnNotify.hidden = false;
     notifyHint.hidden = false;
-    notifyHint.textContent = `Opens ${NOTIFY.instagramHandle} — your suggested time gets copied so you can paste it in DMs.`;
-    btnNotify.textContent = "Text Umar on Instagram";
+    notifyHint.textContent =
+      kind === "aug14"
+        ? `Opens ${NOTIFY.instagramHandle} — tap so I actually know you said yes.`
+        : `Opens ${NOTIFY.instagramHandle} — your suggested time gets copied so you can paste it in DMs.`;
+    btnNotify.textContent =
+      kind === "aug14" ? "Tell Umar I’m in" : "Text Umar on Instagram";
     btnNotify.href = NOTIFY.instagramUrl;
     btnNotify.onclick = () => {
-      // Don't await — keeps the tap gesture so Instagram can open on iPhone
       copyPingMessage().then((ok) => {
         notifyHint.textContent = ok
-          ? "Time copied ✓ — paste it in my Instagram DMs."
+          ? "Message copied ✓ — paste it in my Instagram DMs."
           : `Paste this in DMs: ${lastPingMessage}`;
       });
     };
@@ -231,12 +237,18 @@
   });
 
   function finishAccept(whenText) {
-    hideNotify();
     rsvpEyebrow.textContent = "MISSION ACCEPTED";
     rsvpTitle.textContent = "See you at Corvin, Kata.";
     rsvpLede.textContent =
-      "Locked in. Try not to spoil the third act in the lobby.";
+      "Almost locked — one last tap so Umar gets the memo on Instagram.";
     rsvpWhen.textContent = whenText;
+    setupNotify(whenText, "", "aug14");
+    lastPingMessage =
+      "Hey Umar! I’m in for Spider-Man BND at Corvin Mozi — Friday Aug 14 around 5 PM.";
+    copyPingMessage();
+    window.open(NOTIFY.instagramUrl, "_blank", "noopener,noreferrer");
+    notifyHint.textContent =
+      "If Instagram didn’t open, tap below. A ready-made “I’m in” message should be copied.";
     goTo("rsvp");
   }
 
@@ -303,7 +315,7 @@
     rsvpLede.textContent =
       "Got it — Instagram should be open. Paste the copied time in my DMs so I can lock tickets.";
     rsvpWhen.textContent = note ? `${whenText} · “${note}”` : whenText;
-    setupNotify(whenText, note);
+    setupNotify(whenText, note, "custom");
     notifyHint.textContent =
       "If Instagram didn’t open, tap below. Your time should already be copied.";
     goTo("rsvp");
